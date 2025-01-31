@@ -6,6 +6,7 @@ Time sending/receiving bytes
 import time
 
 import serial
+xrange = range # Elizabeth: xrange not defined in python3
 
 conn = serial.Serial('/dev/ttyACM0', 115200)
 if conn.inWaiting():

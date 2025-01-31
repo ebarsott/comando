@@ -248,7 +248,7 @@ class Namespace(object):
 
 
 def resolve_ctypes_type(t):
-    if isinstance(t, (str, unicode)):
+    if isinstance(t, (str, str)): # Elizabeth: changed unicode to str for python3
         t = t.strip()
         if hasattr(ctypes, t):
             return getattr(ctypes, t)
@@ -277,7 +277,7 @@ def resolve_command_types(commands):
     See EventManager for a description of the resulting command structure.
     """
     # id:name(arg0,arg1)=result?doc
-    if isinstance(commands, (str, unicode)):
+    if isinstance(commands, (str, str)): # Elizabeth: changed unicode to str for python3
         cd = {}
         for cs in commands.splitlines():
             s = cs.strip()
@@ -290,7 +290,7 @@ def resolve_command_types(commands):
         commands = cd
     for cid in commands:
         command = commands[cid]
-        if isinstance(command, (str, unicode)):
+        if isinstance(command, (str, str)): # Elizabeth: changed unicode to str for python3
             #print(command)
             m = re.match(command_regex, command.strip())
             if m is None:
@@ -306,14 +306,14 @@ def resolve_command_types(commands):
                 command['result'] = m.group('result')[1:]
             #print(command)
         if 'args' in command:
-            if isinstance(command['args'], (str, unicode)):
+            if isinstance(command['args'], (str, str)): # Elizabeth: changed unicode to str for python3
                 command['args'] = command['args'].split(',')
             if not isinstance(command['args'], (tuple, list)):
                 command['args'] = (command['args'], )
             # resolve args
             command['args'] = [resolve_ctypes_type(t) for t in command['args']]
         if 'result' in command:
-            if isinstance(command['result'], (str, unicode)):
+            if isinstance(command['result'], (str, str)): # Elizabeth: changed unicode to str for python3
                 command['result'] = command['result'].split(',')
             if not isinstance(command['result'], (tuple, list)):
                 command['result'] = (command['result'], )

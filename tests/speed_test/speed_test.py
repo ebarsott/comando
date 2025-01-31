@@ -8,6 +8,7 @@ import time
 import serial
 
 import pycomando
+xrange = range # Elizabeth: xrange not defined in python3
 
 conn = serial.Serial('/dev/ttyACM0', 115200)
 com = pycomando.Comando(conn)
